@@ -1,4 +1,6 @@
 const User = require('../model/model');
+const bcrypt=require('bcrypt');
+//const jwt=require('jsonwebtoken')
 
 exports.addmethod = async (req, res, next) => {
   try {
@@ -24,6 +26,39 @@ exports.addmethod = async (req, res, next) => {
   
 }
 
+
+exports.login = async (req, res) => {
+  try {
+    const{email,password}=req.body;
+    console.log(password);
+
+    // Find user by email
+     User.findAll({ where: { email: email } }).then(user=>{
+      if(user.length>0){
+        if(user[0].password===password){
+          res.status(200).json({success:true,message:"User loged in successfully"})
+          
+        }
+        else{
+         
+         return res.status(400).json({ success: false, msg: "incorrect password" });
+
+        }
+      }
+      else{
+        alert('user not fount')
+        return res.status(404).json({ success: false, msg: "user not found" });
+      
+      }
+
+     });
+
+  } catch (e) {
+    res.status(500).json({ msg: "Internal server error" });
+  }
+};
+
+
 exports.getmethod = async (req, res,next) => {
   try {
     const data = await User.findAll();
@@ -42,4 +77,3 @@ exports.getmethod = async (req, res,next) => {
     next();
   }
 };
-
