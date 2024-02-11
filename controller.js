@@ -6,11 +6,12 @@ exports.addmethod = async (req, res, next) => {
   try {
     const { username ,email,password} = req.body;
     console.log('from req.body>>>>', username,email,password);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newUser = await User.create({
       username,
       email,
-      password
+      password:hashedPassword
       
 
     })
@@ -29,35 +30,29 @@ exports.addmethod = async (req, res, next) => {
 
 exports.login = async (req, res) => {
   try {
-    const{email,password}=req.body;
+    const { email, password } = req.body;
     console.log(password);
 
-    // Find user by email
-     User.findAll({ where: { email: email } }).then(user=>{
-      if(user.length>0){
-        if(user[0].password===password){
-          res.status(200).json({success:true,message:"User loged in successfully"})
-          
-        }
-        else{
-         
-         return res.status(400).json({ success: false, msg: "incorrect password" });
+    
+    const user = await User.findOne({ where: { email } });
 
-        }
-      }
-      else{
-        alert('user not fount')
-        return res.status(404).json({ success: false, msg: "user not found" });
-      
-      }
+    if (user) {
+     
+      const passwordMatch = await bcrypt.compare(password, user.password);
 
-     });
+      if (passwordMatch) {
+        res.status(200).json({ success: true, message: "User logged in successfully" });
+      } else {
+        res.status(400).json({ success: false, msg: "Incorrect password" });
+      }
+    } else {
+      res.status(404).json({ success: false, msg: "User not found" });
+    }
 
   } catch (e) {
     res.status(500).json({ msg: "Internal server error" });
   }
 };
-
 
 exports.getmethod = async (req, res,next) => {
   try {
