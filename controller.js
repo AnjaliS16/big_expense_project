@@ -1,6 +1,13 @@
 const User = require('../model/model');
 const bcrypt=require('bcrypt');
-//const jwt=require('jsonwebtoken')
+const jwt=require('jsonwebtoken')
+//const crypto=require('crypto')
+//const keyLengthBytes = 32;
+
+
+const jwtSecretKey = '5f657374696e672d546578742d5365727665725f32336665736372697074696f6e2d33303435303536353537343031323334353637'
+console.log("Generated JWT Secret Key:", jwtSecretKey);
+
 
 exports.addmethod = async (req, res, next) => {
   try {
@@ -27,6 +34,10 @@ exports.addmethod = async (req, res, next) => {
   
 }
 
+function generatetoken(id){
+ return jwt.sign({userId:id},jwtSecretKey )
+}
+//token:generatetoken(user[0].id)
 
 exports.login = async (req, res) => {
   try {
@@ -41,7 +52,8 @@ exports.login = async (req, res) => {
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (passwordMatch) {
-        res.status(200).json({ success: true, message: "User logged in successfully" });
+        const token=generatetoken(user.id);
+        res.status(200).json({ success: true, message: "User logged in successfully",token });
       } else {
         res.status(400).json({ success: false, msg: "Incorrect password" });
       }

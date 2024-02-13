@@ -9,19 +9,32 @@ function handleFormSubmit(event) {
     const obj = {
         exp: exp,
         des: des,
-        select:select
+        select:select,
+      //  userId:1
+        
+        
     }
 
     //post detail on crud
+    const token=localStorage.getItem('token')
+    console.log('token>',token)
     
-      axios.post("http://localhost:3600/expense/add-expense", obj)
+      axios.post("http://localhost:4681/expense/add-expense", obj,{
+        headers:{
+     'Content-Type': 'application/json',
+      "Authorization":`Bearer ${token}`,
+    }})
      .then((response)=>{
      console.log('posted data')
-           // const data = await response.data.newuser;
-            showUserOnScreen(response.data.newuser)
-           // console.log()
-            
-            console.log(response)
+     
+  
+     
+        showUserOnScreen(response.data.newuser);
+        console.log('Data posted successfully:', response.data);
+       
+       // console.log('Error from backend:', response.data.error);
+      
+    
           
         })
         .catch((err) => {
@@ -38,21 +51,34 @@ function handleFormSubmit(event) {
 }
 
 //retrieve from crud
-window.addEventListener("DOMContentLoaded", async() => {
+window.onload= async() => {
+    const token=localStorage.getItem('token')
+    console.log('token>>>',token)
+   
+     const headers={
+        'Content-Type': 'application/json',
+        "Authorization":`Bearer ${token}`,
+    }
+    
     try{
-   const response= await axios.get("http://localhost:3600/expense/get-expense")
+   const response= await axios.get("http://localhost:4681/expense/get-expense",{
+    headers:headers})
    console.log('got our data')
+   console.log('headers>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>',headers)
+    
         
-            console.log(response)
+            console.log(response.data)
 
             for (var i = 0; i < response.data.alluser.length; i++) {
                 showUserOnScreen(response.data.alluser[i])
             }
         }
-        catch(err)  {
+    
+      catch(err)  {
             console.log(err)
         }
-})
+    
+    }
 
 //print detail on screen
 function showUserOnScreen(obj) {
@@ -84,9 +110,15 @@ async function DeleteUser(id) {
     
     console.log( typeof id)
     console.log(id)
+     const token=localStorage.getItem('token')
     
     try{
-  const res=await axios.delete(`http://localhost:3600/expense/delete-expense/${id}`)
+  const res=await axios.delete(`http://localhost:4681/expense/delete-expense/${id}`,{
+    headers:{
+        'Content-Type': 'application/json',
+         "Authorization":`Bearer ${token}`,
+       }
+  })
   console.log('deleted successfully')
         
             removeUserFromScreen(id)
