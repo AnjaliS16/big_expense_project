@@ -10,7 +10,7 @@ async function handle(event) {
   };
 
   try {
-    const result = await axios.post("http://localhost:4681/login", obj)
+    const result = await axios.post("http://localhost:3000/login", obj)
    
 
     console.log(result)
@@ -30,7 +30,7 @@ async function handle(event) {
     document.getElementById('password').value = '';
     alert('login successfull!!')
 
-    window.location.href='file:///C:/Users/VIJAY/Desktop/expense%20big%20project/frontend/expense.html'
+    window.location.href='expense.html'
 
 
   }

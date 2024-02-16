@@ -1,11 +1,13 @@
 const User = require('../model/model');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken')
+require('dotenv').config({ path: __dirname + '/../.env' });
 //const crypto=require('crypto')
 //const keyLengthBytes = 32;
 
 
-const jwtSecretKey = '5f657374696e672d546578742d5365727665725f32336665736372697074696f6e2d33303435303536353537343031323334353637'
+const jwtSecretKey = process.env.JWTSECRETKE;
+console.log('RAZORPAY_KEY_SECRET:', process.env.jwtSecretKey)
 console.log("Generated JWT Secret Key:", jwtSecretKey);
 
 
