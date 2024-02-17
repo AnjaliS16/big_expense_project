@@ -10,9 +10,11 @@ const sequelize = require('./util/database');
 const Details = require('./router/router');
 const addexpense=require('./router/expense')
 const purchase=require('./router/purchase')
+const premium =require('./router/premium')
 const user=require('./model/model')
 const expense=require('./model/expense')
 const order=require('./model/purchase')
+
 
 
 const path=require('path')
@@ -30,6 +32,7 @@ app.use(bodyparser.json());
 app.use(Details);
 app.use(addexpense);
 app.use(purchase);
+app.use(premium)
 
 user.hasMany(expense);
 expense.belongsTo(user);
@@ -39,7 +42,7 @@ order.belongsTo(user);
 
 sequelize.sync()
 .then(()=>{
-    app.listen(3000,()=>{
+    app.listen(7777,()=>{
         console.log('server running on port 3000') 
     });
 }) 

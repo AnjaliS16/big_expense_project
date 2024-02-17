@@ -12,38 +12,73 @@
 
     <title>Expense tracker app</title>
 
-  /  <script src="https://kit.fontawesome.com/5a6a11ca8f.js" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/5a6a11ca8f.js" crossorigin="anonymous"></script>
+   
 
 </head>
 
-<body style="background-color:rgba(0, 0, 0, 0.233);">
-    <h1 class="text-bg-secondary p-3 text-center ">EXPENSE TRACKER PROJECT </h1>
-
+<body style="background: url('https://wallpapers.com/images/hd/grey-texture-background-d29qkeb2b46ygint.jpg')no-repeat center center fixed;background-size: cover;background-position: center;">
+   
+<button id="rzp-button" style="margin-right:1190px;color:white;background-color: black;font-weight: bold;">BUY PREMIUM</button>
     <br><br>
-    <form onsubmit="handleFormSubmit(event)">
-        <label for="exp" class="fw-bolder">CHOOSE EXPENSE AMOUNT:</label>
-         <input type="number" placeholder="ENTER AMOUNT" id="exp" name="exp" required>
-         <label for="des" class="fw-bolder">CHOOSE DESCRIPTION:</label>
-         <input type="TEXT" placeholder=" ENTER DESCRIPTION" id="des" name="des" required>
-         <label for="select" class="fw-bolder">CATEGORY:</label>
-         <select id="select">
-            <option selected>category</option>
+    <form style="background-color:black;padding:20px;margin-left: 20px;margin-right:20px;box-shadow: 0 0 10px rgba(0, 0, 0, 0.7);"onsubmit="handleFormSubmit(event)">
+        <div class="row">
+        <div class="col-sm-3">
+            <div class="input-group">
+        <select id="select"class="form-control fw-bolder"style="background-color:grey;color:white">
+            <option selected>SELECT CATEGORY</option>
             <option value="food">FOOD</option>
             <option value="movie">MOVIE</option>
             <option value="fuel">FUEL</option>
             <option value="electricity bill">ELECTRICITY</option>
             <option value="water bill">WATER</option>
         </select  required>
-        
-        
-        <button type="submit" id="addButton" class="badge text-bg-info shadow-lg p-3 tertiary rounded">ADD EXPENSE</button>
+    </div>
+    </div>
+           <div class="col-sm-3">
+             <label class="visually-hidden" for="des">DESCIPTION</label>
+             <div class="input-group">
+               <div  class="fw-bolder"style="padding:8px;background-color: grey;color:white;"class="input-group-text">DESCIPTION</div>
+               <input type="text" class="form-control" id="des" name="des" required>
+             </div>
+           </div>
+
+           <div class="col-sm-3">
+            <label class="visually-hidden" for="exp">AMOUNT</label>
+            <div class="input-group">
+              <div  class="fw-bolder"style="padding:8px;background-color: grey;color:white;"class="input-group-text">AMOUNT</div>
+              <input type="number" class="form-control" id="exp" name="exp" required>
+            </div>
+          </div>
+          <div class="col-sm-2">
+          <button style="color:grey;font-weight:bold;background-color:white;"class="form-control" type="submit" id="addButton" class="badge text-bg-info shadow-lg p-3  rounded">ADD EXPENSE</button>
+    </div>
+    </div>
+
     </form>
     <br>
     <br>
 
-    <ul id="listofitems"></ul>
+    <table class="table" style="margin-left: 30px; width: calc(100% - 60px);box-shadow: 0 0 20px rgba(0, 0, 0, 0.9);">
+        <thead>
+          <tr >
+            <th scope="col"style="background-color:black;color:white">DATE</th>
+            <th scope="col"style="background-color:black;color:white">AMOUNT</th>
+            <th scope="col"style="background-color:black;color:white">DESCRIPTION</th>
+            <th scope="col"style="background-color:black;color:white">CATEGORY</th>
+            <th scope="col"style="background-color:black;color:white"></th>
+            <th scope="col"style="background-color:black;color:white"></th>
+            
+          </tr>
+        </thead>
+        <tbody id="listofitems"class="table-group-divider">
+          
+        </tbody>
+      </table>
+
+   
     <p style="color:palevioletred;text-align: right;">Thanks for visiting  </p>
-   <i style="position:absolute;right:50px;color:lightseagreen"class="fa-solid fa-face-smile"></i>
+   <i style="position:absolute;right:50px;color:yellow"class="fa-solid fa-face-smile"></i>
 
 
 
@@ -62,6 +97,7 @@
 </body>
 <script src="js/expense.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.5.1/axios.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uuid@3.4.0/dist/uuid.min.js"></script>
 
 </html>

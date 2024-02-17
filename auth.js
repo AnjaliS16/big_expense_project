@@ -1,8 +1,9 @@
 const jwt=require('jsonwebtoken')
 const User=require('../model/model')
 const crypto=require('crypto')
+require('dotenv').config({ path: __dirname + '/../.env' });
 
-const jwtSecretKey = '5f657374696e672d546578742d5365727665725f32336665736372697074696f6e2d33303435303536353537343031323334353637'
+const jwtSecretKey = process.env.JWTSECRETKEY
 console.log("Generated JWT Secret Key  from auth:", jwtSecretKey);
 const authenticate=(req,res,next)=>{
     try{

@@ -6,7 +6,7 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 //const keyLengthBytes = 32;
 
 
-const jwtSecretKey = process.env.JWTSECRETKE;
+const jwtSecretKey =process.env.JWTSECRETKEY;
 console.log('RAZORPAY_KEY_SECRET:', process.env.jwtSecretKey)
 console.log("Generated JWT Secret Key:", jwtSecretKey);
 
@@ -36,8 +36,8 @@ exports.addmethod = async (req, res, next) => {
   
 }
 
-function generatetoken(id){
- return jwt.sign({userId:id},jwtSecretKey )
+function generatetoken(id,name,ispremiumuser){
+ return jwt.sign({userId:id,name:name,ispremiumuser},jwtSecretKey )
 }
 //token:generatetoken(user[0].id)
 
@@ -54,7 +54,7 @@ exports.login = async (req, res) => {
       const passwordMatch = await bcrypt.compare(password, user.password);
 
       if (passwordMatch) {
-        const token=generatetoken(user.id);
+        const token=generatetoken(user.id,user.name,user.ispremiumuser);
         res.status(200).json({ success: true, message: "User logged in successfully",token });
       } else {
         res.status(400).json({ success: false, msg: "Incorrect password" });
@@ -86,3 +86,4 @@ exports.getmethod = async (req, res,next) => {
     next();
   }
 };
+module.exports.generatetoken = generatetoken;
