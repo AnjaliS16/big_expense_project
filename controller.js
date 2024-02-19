@@ -2,6 +2,7 @@ const User = require('../model/model');
 const bcrypt=require('bcrypt');
 const jwt=require('jsonwebtoken')
 require('dotenv').config({ path: __dirname + '/../.env' });
+const sequelize=require('../util/database')
 //const crypto=require('crypto')
 //const keyLengthBytes = 32;
 
@@ -12,6 +13,7 @@ console.log("Generated JWT Secret Key:", jwtSecretKey);
 
 
 exports.addmethod = async (req, res, next) => {
+  const t= await sequelize.transaction();
   try {
     const { username ,email,password} = req.body;
     console.log('from req.body>>>>', username,email,password);
@@ -23,12 +25,17 @@ exports.addmethod = async (req, res, next) => {
       password:hashedPassword
       
 
+    },
+    {
+      transaction:t
     })
+    await t.commit();
     res.json({ newuser: newUser})
     console.log('response from add method', newUser);
     next();
   }
   catch (error) {
+    await t.rollback();
     res.json({ Error: error })
     console.log('error from add method in add.js', error);
     next();
@@ -41,7 +48,8 @@ function generatetoken(id,name,ispremiumuser){
 }
 //token:generatetoken(user[0].id)
 
-exports.login = async (req, res) => {
+exports.login = async (req, res,next) => {
+  const t = await sequelize.transaction();
   try {
     const { email, password } = req.body;
     console.log(password);
@@ -55,6 +63,7 @@ exports.login = async (req, res) => {
 
       if (passwordMatch) {
         const token=generatetoken(user.id,user.name,user.ispremiumuser);
+        await t.commit();
         res.status(200).json({ success: true, message: "User logged in successfully",token });
       } else {
         res.status(400).json({ success: false, msg: "Incorrect password" });
@@ -62,9 +71,11 @@ exports.login = async (req, res) => {
     } else {
       res.status(404).json({ success: false, msg: "User not found" });
     }
-
+     next();
   } catch (e) {
+    await t.rollback();
     res.status(500).json({ msg: "Internal server error" });
+    next();
   }
 };
 

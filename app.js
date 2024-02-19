@@ -42,7 +42,7 @@ order.belongsTo(user);
 
 sequelize.sync()
 .then(()=>{
-    app.listen(6886,()=>{
+    app.listen(5566,()=>{
         console.log('server running on port 3000') 
     });
 }) 

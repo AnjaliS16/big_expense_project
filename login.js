@@ -10,7 +10,7 @@ async function handle(event) {
   };
 
   try {
-    const result = await axios.post("http://localhost:6886/login", obj)
+    const result = await axios.post("http://localhost:5566/login", obj)
    
 
     console.log(result)
