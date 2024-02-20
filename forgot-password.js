@@ -10,8 +10,12 @@ async function handle(event){
     };
   
     try {
-      const result = await axios.post("http://localhost:5566/password/forgotpassword", obj)
-     
+      const result = await axios.post("http://localhost:4488/password/forgotpassword", obj)
+      if(result.status === 200){
+        document.body.innerHTML += '<div style="color:green;">Mail Successfuly sent <div>'
+    } else {
+        throw new Error('Something went wrong!!!')
+    }
   
       console.log(result)
   
@@ -32,7 +36,8 @@ async function handle(event){
   
     }
     catch (err) {
-  
+       
+        document.body.innerHTML += `<div style="color:red;">${err} <div>`;
     
       console.log(err,'error from forgot-password')
      
@@ -41,3 +46,5 @@ async function handle(event){
   
     }
 }
+
+
