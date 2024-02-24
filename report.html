@@ -5,17 +5,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View expense</title>
-    <link rel="stylesheet" href="css/style.css">
+    
+   
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-
+        <link rel="stylesheet" href="css/style.css">
 
 </head>
 
-<body class="container my-2">
+<body style=" background: url('https://img.freepik.com/premium-photo/personal-expenses-concept-financial-analysis-background-golden-coins-pile-icons_488220-960.jpg')no-repeat center center fixed;backdrop-filter: blur(0px);background-size: 110%;background-position:center;text-align:left;"class="container my-2">
 
     <div class="" id="report-select">
-        <label for="expense-display">Expenses : </label>
+        <label style="color:white;margin-left:453px"for="expense-display">Expenses : </label>
 
         <select name="expense-display" id="expense-display">
             <option value="daily">Day wise</option>
@@ -25,13 +26,13 @@
         </select>
 
         <form class="my-2" id="daily-form">
-            <label for="date">Select the date : </label>
+            <label style="color:white;margin-left:453px"for="date">Select the date : </label>
             <input type="date" name="date" id="date" required>
             <button type="submit">submit</button>
         </form>
 
         <form class="hide my-2" id="monthly-form">
-            <label for="month-picker">Select the month : </label>
+            <label style="color:white;margin-left:453px" for="month-picker">Select the month : </label>
 
             <select name="month-picker" id="month-picker" required>
                 <option value="01">January</option>
@@ -48,13 +49,13 @@
                 <option value="12">December</option>
 
             </select>
-            <label for="year-picker">Select the year : </label>
+            <label style="color:white;" for="year-picker">Select the year : </label>
 
             <select name="year-picker" id="year-picker" required>
-                <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
+                <option value="2024">2024</option>
 
             </select>
 
@@ -63,13 +64,13 @@
 
 
         <form class="hide my-2" id="yearly-form">
-            <label for="year-picker">Select the year : </label>
+            <label style="color:white;margin-left:453px"for="year-picker">Select the year : </label>
 
             <select name="year-picker" id="year-picker" required>
-                <option value="2020">2020</option>
                 <option value="2021">2021</option>
                 <option value="2022">2022</option>
                 <option value="2023">2023</option>
+                <option value="2024">2024</option>
 
             </select>
 
@@ -78,14 +79,15 @@
 
 
     </div>
+    <br>
     <div id="report-display">
         <div class="hide container" id="daily">
-            <h3> day to day expense report for the day : <span></span></h2>
+            <h3 style="color:white;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"> DAY TO DAY EXPENSE REPORT FOR THE DAY : <span></span></h2>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>description</th>
-                        <th>amount</th>
+                        <th>Description</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -99,13 +101,14 @@
                 </tfoot>
             </table>
         </div>
+        <br>
         <div class="hide" id="weekly">
-            <h3>Weekly expense report</h3>
+            <h3 style="color:white;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">WEEKLY EXPENSE REPORT</h3>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>day of week</th>
-                        <th>amount</th>
+                        <th>Day Of Week</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -119,8 +122,9 @@
                 </tfoot>
             </table>
         </div>
+        <br>
         <div class="hide" id="monthly">
-            <h3>Monthly expense report for the month: <span></span></h3>
+            <h3 style="color:white;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">MONTHLY EXPENSE REPORT FOR THE MONTH: <span></span></h3>
             <table class="table">
                 <thead>
                     <tr>
@@ -139,13 +143,14 @@
                 </tfoot>
             </table>
         </div>
+        <br>
         <div class="hide" id="yearly">
-            <h3>Yearly expense report for the year : <span></span></h3>
+            <h3 style="color:white;font-size: 20px;font-family:Georgia, 'Times New Roman', Times, serif, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">YEARLY EXPENSE REPORT FOR THE YEAR : <span></span></h3>
             <table class="table">
                 <thead>
                     <tr>
-                        <th>month</th>
-                        <th>amount</th>
+                        <th>Month</th>
+                        <th>Amount</th>
                     </tr>
                 </thead>
                 <tbody>

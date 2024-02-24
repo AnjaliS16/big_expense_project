@@ -5,17 +5,18 @@ require('dotenv').config({ path: __dirname + '/../.env' });
 
 const jwtSecretKey = process.env.JWTSECRETKEY
 console.log("Generated JWT Secret Key  from auth:", jwtSecretKey);
-const authenticate=(req,res,next)=>{
+const authenticate=   async (req,res,next)=>{
     try{
         const tokenHeader=req.header('Authorization')
         const token = tokenHeader ? tokenHeader.replace('Bearer ', '') : null;
         console.log('token received>>>>>>>>>>>>',token);
         const decode=jwt.verify(token,jwtSecretKey)
         console.log('userid>>>',decode.userId)
-        User.findByPk(decode.userId).then(user=>{
+       const user= await User.findByPk(decode.userId)
             req.user=user;
+            req.ispremiumuser = decode.ispremiumuser;
             next();
-        })
+        
     }
     catch(error){
         if (error instanceof jwt.TokenExpiredError) {

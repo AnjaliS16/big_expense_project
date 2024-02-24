@@ -12,10 +12,12 @@ const addexpense=require('./router/expense')
 const purchase=require('./router/purchase')
 const premium =require('./router/premium')
 const resetpassword=require('./router/resetpassword')
+const report=require('./router/report')
 const user=require('./model/model')
 const expense=require('./model/expense')
 const order=require('./model/purchase')
 const Forgotpassword=require('./model/forgotpassword')
+const download=require('./model/download')
 
 
 
@@ -36,6 +38,7 @@ app.use(addexpense);
 app.use(purchase);
 app.use(premium)
 app.use(resetpassword)
+app.use(report)
 
 user.hasMany(expense);
 expense.belongsTo(user);
@@ -46,9 +49,12 @@ order.belongsTo(user);
 user.hasMany(Forgotpassword);
 Forgotpassword.belongsTo(user);
 
+user.hasMany(download);
+download.belongsTo(user);
+
 sequelize.sync()
 .then(()=>{
-    app.listen(4448,()=>{
+    app.listen(4334,()=>{
         console.log('server running on port 3000') 
     });
 }) 

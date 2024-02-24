@@ -39,7 +39,7 @@ document.getElementById('daily-form').addEventListener('submit' , async(e)=>{
     const date = e.target.date.value
     try{
            const token=localStorage.getItem('token')
-        const res = await axios.post('http://localhost:4448/getdate' , {date} ,{
+        const res = await axios.post('http://localhost:4334/getdate' , {date} ,{
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`,
@@ -63,10 +63,10 @@ document.getElementById('daily-form').addEventListener('submit' , async(e)=>{
             const td1 = document.createElement('td')
             const td2 = document.createElement('td')
 
-            td1.textContent = elem.description
-            td2.textContent = elem.expense
+            td1.textContent = elem.des
+            td2.textContent = elem.exp
 
-            total = total + +elem.expense
+            total = total + +elem.exp
             tr.appendChild(td1)
             tr.appendChild(td2)
 
@@ -88,7 +88,7 @@ document.getElementById('yearly-form').addEventListener('submit' , async(e)=>{
     const year = e.target['year-picker'].value
     try{
         const token=localStorage.getItem('token')
-        const res = await axios.post('http://localhost:4448/getYearly' , {year},{
+        const res = await axios.post('http://localhost:4334/getYearly' , {year},{
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`,
@@ -113,9 +113,9 @@ document.getElementById('yearly-form').addEventListener('submit' , async(e)=>{
             const td2 = document.createElement('td')
 
             td1.textContent = elem.month
-            td2.textContent = elem.totalAmount
+            td2.textContent = elem.totalExpenses
 
-            total = total + +elem.totalAmount
+            total = total + +elem.totalExpenses
             tr.appendChild(td1)
             tr.appendChild(td2)
 
@@ -139,7 +139,7 @@ document.getElementById('monthly-form').addEventListener('submit' , async(e)=>{
     try{
         const token=localStorage.getItem('token')
 
-        const res = await axios.post('http://localhost:4448/getMonthly' , {month},{
+        const res = await axios.post('http://localhost:4334/getMonthly' , {month},{
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`,
@@ -164,9 +164,9 @@ document.getElementById('monthly-form').addEventListener('submit' , async(e)=>{
             const td2 = document.createElement('td')
 
             td1.textContent = elem.date
-            td2.textContent = elem.totalAmount
+            td2.textContent = elem.totalExpenses
 
-            total = total + +elem.totalAmount
+            total = total + +elem.totalExpenses
             tr.appendChild(td1)
             tr.appendChild(td2)
 
@@ -185,7 +185,7 @@ async function displayWeekly(){
     
     try{
         const token=localStorage.getItem('token')
-        const res = await axios.get('http://localhost:4448/getweekly',{
+        const res = await axios.get('http://localhost:4334/getweekly',{
             headers: {
                 'Content-Type': 'application/json',
                 "Authorization": `Bearer ${token}`,
@@ -210,9 +210,9 @@ async function displayWeekly(){
             const td2 = document.createElement('td')
 
             td1.textContent = elem.week
-            td2.textContent = elem.totalAmount
+            td2.textContent = elem.totalExpenses
 
-            total = total + +elem.totalAmount
+            total = total + +elem.totalExpenses
             tr.appendChild(td1)
             tr.appendChild(td2)
 

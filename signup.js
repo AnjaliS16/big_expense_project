@@ -11,7 +11,7 @@ function handleFormSubmit(event){
       };
 
 
-      axios.post("http://localhost:4448/add-details", obj)
+      axios.post("http://localhost:4334/add-details", obj)
         .then((response) => {
             if(response.data.exists){
                 console.log('already have bro>>>>>>')
@@ -41,7 +41,7 @@ function handleFormSubmit(event){
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
-        const response = await axios.get("http://localhost:4448/get-details")
+        const response = await axios.get("http://localhost:4334/get-details")
         console.log('got our data')
 
        
