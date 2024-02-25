@@ -54,7 +54,7 @@ download.belongsTo(user);
 
 sequelize.sync()
 .then(()=>{
-    app.listen(4334,()=>{
+    app.listen(4434,()=>{
         console.log('server running on port 3000') 
     });
 }) 
