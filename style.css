@@ -190,3 +190,12 @@ button:hover::after {
 .table tfoot tr:nth-child(odd) {
     background-color: #e9ecef; /* Darker Gray for Odd Rows in Footer */
 }
+
+
+
+@media (max-width: 768px) {
+    input, button {
+      /* Adjust styles for mobile devices */
+      width: 110px; /* Make inputs and buttons take full width */
+    }
+  }

@@ -1,7 +1,11 @@
 const express = require('express');
 const cors = require('cors');
-require('dotenv').config();
-//app.use(cors());
+require('dotenv').config({ path: __dirname + '/../.env' });
+const helmet=require('helmet');
+const compression=require('compression');
+const morgan=require('morgan');
+const fs=require('fs');
+
 
 
 const bodyparser = require('body-parser');
@@ -22,10 +26,16 @@ const download=require('./model/download')
 
 
 const path=require('path')
-
 const app = express();
 
+const accessLogStream=fs.createWriteStream(
+    path.join(__dirname,'access.log'),{flags:'a'}
+);
 
+//,{stream:accessLogStream}
+app.use(helmet());
+app.use(compression());
+app.use(morgan('combined',{stream:accessLogStream}))
 app.use(cors());
 
 app.use(express.static(path.join(__dirname , '..' , 'frontend')))
@@ -54,7 +64,7 @@ download.belongsTo(user);
 
 sequelize.sync()
 .then(()=>{
-    app.listen(9994,()=>{
+    app.listen(process.env.PORT || 3000,()=>{
         console.log('server running on port 3000') 
     });
 }) 

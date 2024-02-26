@@ -10,14 +10,14 @@ async function handle(event){
     };
   
     try {
-      const result = await axios.post("http://localhost:4434/password/forgotpassword", obj)
+      const result = await axios.post("http://localhost:6300/password/forgotpassword", obj)
       if(result.status === 200){
         document.body.innerHTML += '<div style="color:green;">Mail Successfuly sent <div>'
     } else {
         throw new Error('Something went wrong!!!')
     }
   
-      console.log(result)
+     // console.log(result)
   
       console.log('posted data')
       

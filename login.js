@@ -10,10 +10,10 @@ async function handle(event) {
   };
 
   try {
-    const result = await axios.post("http://localhost:4434/login", obj)
+    const result = await axios.post("http://localhost:6300/login", obj)
    
 
-    console.log(result)
+    //console.log(result)
 
     console.log('posted data')
     if (result.data.token) {
@@ -22,7 +22,7 @@ async function handle(event) {
     }
 
     // showUserOnScreen(response.data.newuser)
-    console.log(result.data)
+    //console.log(result.data)
 
 
 

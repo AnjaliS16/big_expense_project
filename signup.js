@@ -11,7 +11,7 @@ function handleFormSubmit(event){
       };
 
 
-      axios.post("http://localhost:4434/add-details", obj)
+      axios.post("http://localhost:6300/add-details", obj)
         .then((response) => {
             if(response.data.exists){
                 console.log('already have bro>>>>>>')
@@ -20,7 +20,7 @@ function handleFormSubmit(event){
             console.log('posted data')
             
            // showUserOnScreen(response.data.newuser)
-         console.log(response.data)
+        // console.log(response.data)
         
 
         })
@@ -35,13 +35,16 @@ function handleFormSubmit(event){
     document.getElementById('username').value = '';
     document.getElementById('email').value = '';
     document.getElementById('password').value = '';
+
+    window.location = "login.html"
+
     
 
 }
 
 window.addEventListener("DOMContentLoaded", async () => {
     try {
-        const response = await axios.get("http://localhost:4434/get-details")
+        const response = await axios.get("http://localhost:6300/get-details")
         console.log('got our data')
 
        
